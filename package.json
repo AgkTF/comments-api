@@ -1,0 +1,8 @@
+{
+	"name": "commentsapi",
+	"version": "1.0.0",
+	"description": "A RESTful API for managing comments.",
+	"main": "App.js",
+	"author": "AgkTF",
+	"license": "MIT"
+}
