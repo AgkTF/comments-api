@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const commentRoutes = require('./routes/comments');
+const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -11,6 +12,7 @@ app.use((req, res, next) => {
 	next();
 });
 
+app.use('/auth', authRoutes);
 app.use(commentRoutes);
 
 app.use((error, req, res, next) => {
@@ -22,6 +24,7 @@ app.use((error, req, res, next) => {
 	});
 });
 
-app.listen(process.env.APP_PORT, () => {
-	console.log(`The App is running 🏃  on port ${process.env.APP_PORT}`);
+const APP_PORT = process.env.PORT ? process.env.PORT : 8080;
+app.listen(process.env.PORT || 8080, () => {
+	console.log(`The App is running 🏃  on port ${APP_PORT}`);
 });
