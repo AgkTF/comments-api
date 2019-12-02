@@ -57,7 +57,7 @@ exports.signIn = (req, res, next) => {
 				const token = jwt.sign(
 					{
 						email: user.email,
-						userId: user.user_id.toString()
+						userId: user.user_id
 					},
 					'MySuperSecretPrivateKey.ItsBetterToBeLong',
 					{
