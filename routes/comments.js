@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const commentsController = require('../controllers/comments');
+const isAuth = require('../middlewares/isAuth');
 
 // define the routes
 
