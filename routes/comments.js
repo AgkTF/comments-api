@@ -7,5 +7,6 @@ const isAuth = require('../middlewares/isAuth');
 
 // please note that for easier testing, I removed the isAuth middleware for now.
 router.post('/comment', commentsController.addComment);
+router.put('/comment/:commentId', commentsController.editComment);
 
 module.exports = router;
