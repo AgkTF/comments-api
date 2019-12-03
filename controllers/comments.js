@@ -59,3 +59,30 @@ exports.editComment = (req, res, next) => {
 			}
 		});
 };
+
+exports.deleteComment = (req, res, next) => {
+	const commentId = req.params.commentId;
+
+	db.query('DELETE FROM comments WHERE comment_id = $1 RETURNING *', [
+		commentId
+	])
+		.then(queryResult => {
+			if (queryResult.rows.length == 0) {
+				const error = new Error('This comment cannot be found!');
+				error.statusCode = 404;
+				return next(error);
+			}
+			res.status(200).json({
+				message: 'Comment successfully deleted!',
+				comment: queryResult.rows[0]
+			});
+		})
+		.catch(err => {
+			if (err) {
+				if (!err.statusCode) {
+					err.statusCode = 500;
+				}
+				next(err);
+			}
+		});
+};
