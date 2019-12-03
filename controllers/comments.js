@@ -4,12 +4,12 @@ exports.addComment = (req, res, next) => {
 	const content = req.body.content;
 	const userId = req.userId;
 
-	db.query('SELECT user_name FROM users WHERE user_id = $1', [12])
+	db.query('SELECT user_name FROM users WHERE user_id = $1', [userId])
 		.then(user => {
 			user_name = user.rows[0].user_name;
 			return db.query(
 				'INSERT INTO comments (user_id, post_id, content) VALUES ($1, $2, $3) RETURNING *',
-				[12, 2, content]
+				[userId, 3, content]
 			);
 		})
 		.then(comment => {
